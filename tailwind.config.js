@@ -5,7 +5,17 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        dropdown: {
+          '0%': {height: '0'},
+          '100%': {height: '30rem'}
+        },
+      },
+      animation: {
+        'dropdown': 'dropdown 0.25s ease-out'
+      }
+    },
   },
   plugins: [],
 }

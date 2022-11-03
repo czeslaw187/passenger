@@ -12,8 +12,6 @@ import sides from '../public/img/starter-bruschetta.jpeg'
 
 export default function Home() {
   const dispatch = useDispatch()
-  const allFood = useSelector(state=>state.food)
-
   useEffect(()=>{
     dispatch(fetchFullMenu())
   },[dispatch])
