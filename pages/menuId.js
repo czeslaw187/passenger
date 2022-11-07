@@ -12,9 +12,9 @@ function MenuItem() {
     
     return ( 
         <div className='min-w-full max-h-full pt-5'>
-            <Link href={'/'}>
-                <p className='ml-4 hover:underline'>{'<< Back'}</p>
-            </Link>
+            <p className='ml-4 hover:underline z-10'>
+                <Link href={'/'}>{'<< Back'}</Link>
+            </p>
             <ul>
                 {
                     food && food.map((el,id)=>{

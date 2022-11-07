@@ -22,17 +22,19 @@ function Navbar() {
                 </button>
             </div>
             <div>
-                <ul className={dropdown ? 'animate-opac bg-gradient-to-br from-indigo-100' : "w-full h-0 opacity-0"}>
+                <ul className={dropdown ? 'animate-opac bg-gradient-to-br from-indigo-100' : "w-full h-0 opacity-0 hidden"}>
                     {
                         theOrder && theOrder.map((el,id)=>{
                             return (
-                                <li key={id} className="text-2xl space-y-5 ml-2 grid grid-cols-2 hover:underline">
+                                <li key={id} className="text-2xl space-y-5 ml-2 grid grid-cols-3 hover:underline items-baseline">
                                     <p>{el.item}</p>
+                                    <p className="text-right">£{el.price.toFixed(2)}</p>
                                     <button type="close" className="active:scale-75 transition ease-in-out duration-200">X</button>
                                 </li>
                             )
                         })
                     }
+                    <p className="text-right mr-[5rem] text-xl">Total: £{theOrder.reduce((total,sum)=>{return total + sum.price},0)}</p>
                 </ul>
             </div>
         </>
