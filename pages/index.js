@@ -29,7 +29,7 @@ export default function Home() {
             <li key={id} 
                 className="flex flex-col justify-center transition-all hover:scale-110 hover:z-10 active:scale-100 m-auto"
                 onClick={()=>{dispatch(setPage(el.category))}}>
-              <Link href={`/${el.category}`}>
+              <Link href={'/menuId'}>
                 <div className="w-[20rem] h-[20rem]  border-2 border-slate-600 relative">
                   <Image src={el.item} fill alt="starter" />
                 </div>

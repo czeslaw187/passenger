@@ -6,7 +6,7 @@ function MenuItem() {
     const dispatch = useDispatch()
     const thePage = useSelector(state=>state.food.activePage)
     let food = useSelector(state=>state.food.food)
-    let myOrder = useSelector(state=>state.food.order)
+    const myOrder = useSelector(state=>state.food.order)
     console.log(myOrder, 'food')
     if (food && food.length > 0) {
         food = food.filter(el=>el.category == thePage)
@@ -15,7 +15,7 @@ function MenuItem() {
     return ( 
         <div className='min-w-full max-h-full pt-5'>
             <Link href={'/'}>
-                <p href='#' className='ml-4'>{'<< Back'}</p>
+                <p className='ml-4 hover:underline'>{'<< Back'}</p>
             </Link>
             <ul>
                 {
