@@ -16,7 +16,7 @@ function Navbar() {
         <>
             <div className=" flex flex-row items-center justify-between min-w-screen h-[4rem] bg-gradient-to-bl from-blue-400 to-slate-50">
                 <a onClick={()=>{dispatch(resetOrder()); setTheOrder([])}} href="#" className="mx-4">Passenger</a>
-                <button onClick={()=>{setDropdown(!dropdown)}} className="mr-5">
+                <button onClick={()=>{setDropdown(!dropdown)}} className={theOrder.length > 0 ? "mr-5" : "hidden"}>
                     <FontAwesomeIcon icon={faClipboard} size='2xl'/>
                     <span className="relative right-10 text-orange-700 font-bol text-lg">{theOrder && theOrder.length}</span>
                 </button>
