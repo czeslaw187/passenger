@@ -6,8 +6,6 @@ function MenuItem() {
     const dispatch = useDispatch()
     const thePage = useSelector(state=>state.food.activePage)
     let food = useSelector(state=>state.food.food)
-    const myOrder = useSelector(state=>state.food.order)
-    console.log(myOrder, 'food')
     if (food && food.length > 0) {
         food = food.filter(el=>el.category == thePage)
     }

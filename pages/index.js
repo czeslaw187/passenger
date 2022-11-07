@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import Image from "next/image"
 import { fetchFullMenu } from "../lib/newSlice"

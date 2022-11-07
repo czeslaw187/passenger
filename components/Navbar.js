@@ -1,11 +1,10 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faClipboard} from '@fortawesome/free-solid-svg-icons'
 import { resetOrder } from "../lib/newSlice";
 
-function Navbar(props) {
+function Navbar() {
     const myOrder = useSelector(state=>state.food.order)
     const [theOrder, setTheOrder] = useState([])
     useEffect(()=>{
@@ -38,17 +37,6 @@ function Navbar(props) {
             </div>
         </>
      );
-}
-
-export async function getStaticProps(context) {
-    const myOrder = useSelector(state=>state.food.order)
-    console.log(context, 'context')
-    
-    return {
-        props: {
-            myOrder
-        }
-    }
 }
 
 export default Navbar;
