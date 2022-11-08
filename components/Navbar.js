@@ -16,7 +16,7 @@ function Navbar() {
     return ( 
         <>
             <div className=" flex flex-row items-center justify-between min-w-screen h-[4rem] bg-gradient-to-bl from-blue-400 to-slate-50">
-                <a onClick={()=>{dispatch(resetOrder()); setTheOrder([])}} href="#" className="mx-4">Passenger</a>
+                <a href="#" className="mx-4">Passenger</a>
                 <button onClick={()=>{setDropdown(!dropdown)}} className={theOrder.length > 0 ? "mr-5" : "hidden"}>
                     <FontAwesomeIcon icon={faClipboard} size='2xl'/>
                     <span className="relative right-10 text-orange-700 font-bol text-lg">{theOrder && theOrder.length}</span>
@@ -36,6 +36,12 @@ function Navbar() {
                         })
                     }
                     <p className={theOrder.length > 0 ? "text-right mr-[5rem] text-xl" : "hidden"}>Total: £{theOrder.reduce((total,sum)=>{return total + sum.price},0).toFixed(2)}</p>
+                    <div className={theOrder.length > 0 ? "flex flex-row justify-end items-center" : "hidden"}>
+                        <button 
+                        onClick={()=>{dispatch(resetOrder()); setTheOrder([])}} 
+                        className="m-5 w-2/12 border-2 border-indigo-500 p-5 rounded-md transition ease-in-out duration-150 active:bg-indigo-200">Clear</button>
+                        <button className="m-5 w-2/12 border-2 border-indigo-500 p-5 rounded-md transition ease-in-out duration-150 active:bg-indigo-200">Send</button>
+                    </div>
                 </ul>
             </div>
         </>
