@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faClipboard} from '@fortawesome/free-solid-svg-icons'
 import { resetOrder, removeItem } from "../lib/newSlice";
-
+import Link from "next/link";
 function Navbar() {
     const myOrder = useSelector(state=>state.food.order)
     const [theOrder, setTheOrder] = useState([])
@@ -16,7 +16,11 @@ function Navbar() {
     return ( 
         <>
             <div className=" flex flex-row items-center justify-between min-w-screen h-[4rem] bg-gradient-to-bl from-blue-400 to-slate-50">
-                <a href="#" className="mx-4">Passenger</a>
+                <div className="flex flex-row items-center">
+                    <a href="#" className="mx-4">Passenger</a>
+                    <button 
+                    className="w-[5rem] h-[2rem] ml-5 text-white bg-indigo-500 transition duration-150 ease-in-out active:bg-indigo-200 rounded-md"><Link href={'/admin'}>Admin</Link></button>
+                </div>
                 <button onClick={()=>{setDropdown(!dropdown)}} className={theOrder.length > 0 ? "mr-5" : "hidden"}>
                     <FontAwesomeIcon icon={faClipboard} size='2xl'/>
                     <span className="relative right-10 text-orange-700 font-bol text-lg">{theOrder && theOrder.length}</span>

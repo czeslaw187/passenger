@@ -10,6 +10,8 @@ import vegan from '../public/img/main-vegan.jpg'
 import potatoe from '../public/img/starter-potatoes.jpg'
 import sides from '../public/img/starter-bruschetta.jpeg'
 
+import Navbar from "../components/Navbar"
+
 export default function Home() {
   const dispatch = useDispatch()
   useEffect(()=>{
@@ -22,7 +24,9 @@ export default function Home() {
     {item: sides, category: 'Side'},
   ]
   return (
-    <ul className="min-w-full max-h-full flex flex-row flex-wrap p-5">
+    <>
+      <Navbar />
+      <ul className="min-w-full max-h-full flex flex-row flex-wrap p-5">
       {
         foodList.map((el,id)=>{
           return (
@@ -40,6 +44,7 @@ export default function Home() {
         })
       }
     </ul>
+    </>
   )
 }
 

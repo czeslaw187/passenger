@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import Link from 'next/link'
-import { setOrder, resetOrder } from '../lib/newSlice'
+import { setOrder } from '../lib/newSlice'
+import Navbar from '../components/Navbar'
 
 function MenuItem() {
     const dispatch = useDispatch()
@@ -11,7 +12,9 @@ function MenuItem() {
     }
     
     return ( 
-        <div className='min-w-full max-h-full pt-5'>
+        <>
+            <Navbar />
+            <div className='min-w-full max-h-full pt-5'>
             <p className='ml-4 hover:underline'>
                 <Link href={'/'}>{'<< Back'}</Link>
             </p>
@@ -30,6 +33,7 @@ function MenuItem() {
                 }
             </ul>
         </div>
+        </>
      );
 }
 
