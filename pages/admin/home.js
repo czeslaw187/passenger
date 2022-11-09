@@ -1,23 +1,23 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { login } from "../../lib/kitchenSlice";
-import Link from "next/link";
+import AdminNav from "../../components/admin/AdminNav";
+import { useEffect } from "react";
 
 function adminHome() {
-    const dispatch = useDispatch()
+    
     const isLogged = useSelector(state=>state.kitchen.isLogged)
     const router = useRouter()
-
-    if (!isLogged) {router.push('/admin')}
+    useEffect(()=>{
+        if (!isLogged) {router.push('/admin')}
+    },[isLogged])
 
     return ( 
         <div>
-            <div className="flex flex-row justify-between">
-                <h1 className="m-2 hover:underline">
-                    <Link href={'/'}>{'<< Back'}</Link>
-                </h1>
-                <button className="w-1/12 h-[3rem] m-3 border-2 border-sky-500 transition duration-150 ease-in-out rounded-lg hover:bg-sky-500 active:bg-sky-300"
-                        onClick={()=>{dispatch(login(false))}}>Sign Out</button>
+            <AdminNav />
+            <div className="max-w-full min-h-screen overflow-auto flex flex-row flex-wrap">
+                <button className="w-[10rem] h-[10rem] border-4 rounded-md border-sky-300 m-5 flex transition duration-150 ease-in-out hover:scale-110 active:scale-100 shadow-md shadow-black">
+                    <p className="m-auto">Orders</p>
+                </button>
             </div>
         </div>
      );
