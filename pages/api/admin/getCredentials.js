@@ -7,6 +7,8 @@ export default async function getCreds(req, res){
         let response = await sql_query('SELECT login, password FROM admin')
         if (response[0].login == credentials.login && response[0].password == credentials.password){
             res.json({login: true, err: ''})
+        } else if (!credentials.login || !credentials.password) {
+            res.json({login: false, err: 'Enter correct login and password'})
         } else {
             res.json({login: false, err: 'Incorrect login or password'})
         }
