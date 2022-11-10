@@ -4,15 +4,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faClipboard} from '@fortawesome/free-solid-svg-icons'
 import { resetOrder, removeItem } from "../lib/newSlice";
 import Link from "next/link";
+import { io } from "socket.io-client"
+let socket = io()
+
 function Navbar() {
     const myOrder = useSelector(state=>state.food.order)
-    const [theOrder, setTheOrder] = useState([])
+    const [theOrder, setTheOrder] = useState(myOrder)
+    useEffect(() => {
+        const socketInitializer = async () => {
+            await fetch('/api/socket');
+        
+            socket.on('connect', () => {
+              console.log('connected')
+            })
+            // socket.emit('input-change', myOrder)
+          }    
+        socketInitializer()
+      }, [])
     useEffect(()=>{
         setTheOrder(myOrder)
     },[myOrder])
     const dispatch = useDispatch()
     const [dropdown, setDropdown] = useState(false)
-    console.log(myOrder, 'the order')
+
+    const sendOrder = (order) => {
+        socket.emit('input-change', order)
+    }
+
     return ( 
         <>
             <div className=" flex flex-row items-center justify-between min-w-screen h-[4rem] bg-gradient-to-bl from-blue-400 to-slate-50">
@@ -44,7 +62,9 @@ function Navbar() {
                         <button 
                         onClick={()=>{dispatch(resetOrder()); setTheOrder([])}} 
                         className="m-5 w-2/12 border-2 border-indigo-500 p-5 rounded-md transition ease-in-out duration-150 active:bg-indigo-200">Clear</button>
-                        <button className="m-5 w-2/12 border-2 border-indigo-500 p-5 rounded-md transition ease-in-out duration-150 active:bg-indigo-200">Send</button>
+                        <button 
+                        className="m-5 w-2/12 border-2 border-indigo-500 p-5 rounded-md transition ease-in-out duration-150 active:bg-indigo-200"
+                        onClick={()=>{sendOrder(theOrder)}}>Send</button>
                     </div>
                 </ul>
             </div>

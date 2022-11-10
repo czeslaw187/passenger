@@ -4,7 +4,6 @@ import Image from "next/image"
 import { fetchFullMenu } from "../lib/newSlice"
 import Link from "next/link"
 import { setPage } from "../lib/newSlice"
-
 import salad from '../public/img/starter-salad.jpg'
 import vegan from '../public/img/main-vegan.jpg'
 import potatoe from '../public/img/starter-potatoes.jpg'
@@ -13,7 +12,7 @@ import sides from '../public/img/starter-bruschetta.jpeg'
 import Navbar from "../components/Navbar"
 
 export default function Home() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch()  
   useEffect(()=>{
     dispatch(fetchFullMenu())
   },[dispatch])

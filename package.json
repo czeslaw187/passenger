@@ -21,7 +21,9 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.4",
     "redux-persist": "^6.0.0",
-    "serverless-mysql": "^1.5.4"
+    "serverless-mysql": "^1.5.4",
+    "socket.io": "^4.5.3",
+    "socket.io-client": "^4.5.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
