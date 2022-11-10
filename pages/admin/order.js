@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addOrder, clearOrders } from "../../lib/kitchenSlice";
 import { io } from "socket.io-client"
+import OrderList from '../../components/admin/OrderList'
 let socket = io()
 
 function order() {
@@ -17,7 +18,14 @@ function order() {
         
             socket.on('update-input', msg => {
             console.log(msg, 'msg')
-                dispatch(addOrder(msg))
+            let date = new Date()
+            date = date.toLocaleString()
+            date = date.split(',')
+                dispatch(addOrder({
+                    orderId:Math.floor(Math.random() * 1000000), 
+                    orderArr:msg,
+                    date: date
+                }))
             })
           }
         socketInitializer()
@@ -33,13 +41,11 @@ function order() {
                         onClick={()=>{dispatch(clearOrders())}}>Clear Orders</button>
             </div>
             <div className="max-w-full min-h-screen mx-1 mt-1 border-2 border-sky-400">
-                <ul>
+                <ul className="flex flex-row flex-wrap">
                     {
                         recent && recent.map((el, id)=>{
                             return (
-                                <li key={id} id={el.id} className="w-3/12 h-3/6 border-2 border-sky-500">
-                                    <p>{el.item}</p>
-                                </li>
+                                <OrderList key={id} el={el} id={id} />
                             )
                         })
                     }  

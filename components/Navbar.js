@@ -29,6 +29,7 @@ function Navbar() {
 
     const sendOrder = (order) => {
         socket.emit('input-change', order)
+        dispatch(resetOrder())
     }
 
     return ( 
