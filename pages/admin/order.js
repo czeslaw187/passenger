@@ -10,6 +10,7 @@ import Link from "next/link";
 
 function order() {
     const [prepDispatch, setPrepDispatch] = useState('prep')
+    const [yesNo, setYesNo] = useState(false)
     const login = useSelector(state=>state.kitchen.isLogged)
     const router = useRouter()
     const dispatch = useDispatch()
@@ -46,7 +47,9 @@ function order() {
     return ( 
         <>
             <AdminNav />
+
             <p className="hover:underline"><Link href={'/admin/home'}>{'<< Back'}</Link></p>
+
             <div className="max-w-full m-2 h-[3rem] border-2 border-sky-400 flex flex-row justify-around items-center shadow-sm shadow-black">
                 <button className={prepDispatch == 'prep' ?
                                    "w-[8rem] h-[2rem] m-1 border-2 border-sky-500 transition duration-150 ease-in-out hover:bg-sky-500 active:bg-sky-300 shadow-sm shadow-black bg-sky-500" :
@@ -57,8 +60,18 @@ function order() {
                                    "w-[8rem] h-[2rem] m-1 border-2 border-sky-500 transition duration-150 ease-in-out hover:bg-sky-500 active:bg-sky-300 shadow-sm shadow-black"}
                         onClick={()=>{setPrepDispatch('dispatch')}}>Dispatch</button>
                 <button className="w-[8rem] h-[2rem] m-1 border-2 border-sky-500 transition duration-150 ease-in-out hover:bg-sky-500 active:bg-sky-300 shadow-sm shadow-black"
-                        onClick={()=>{dispatch(clearOrders())}}>Clear Orders</button>
+                        onClick={()=>{setYesNo(!yesNo)}}>Clear Orders</button>
+                <div className={yesNo ? "animate-show absolute min-w-screen min-h-screen flex" : "hidden"}>
+                    <div className="relative m-auto w-[15rem] h-[8rem] bg-amber-100 border-2 rounded-md text-center flex flex-col justify-center">
+                        <p className="mx-auto text-lg">Are you sure ?</p>
+                        <div className="space-x-4">
+                            <button className="hover:underline" onClick={()=>{dispatch(clearOrders()); setYesNo(!yesNo)}}>Yes</button>
+                            <button className="hover:underline" onClick={()=>{setYesNo(!yesNo)}}>No</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
             <div className="max-w-full min-h-screen mx-1 mt-1 border-2 border-sky-400">
                 <ul className="flex flex-row flex-wrap">
                     {
