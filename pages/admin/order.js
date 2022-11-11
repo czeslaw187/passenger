@@ -40,7 +40,8 @@ function order() {
         socketInitializer()
       }, [])
       const recent = useSelector(state=>state.kitchen.orderArray)
-
+      const prepArr = recent.filter(el=>el.state == 'prep')
+      const dispatchArr = recent.filter(el=>el.state == 'dispatch')
       console.log(recent, 'recent')
     return ( 
         <>
@@ -61,7 +62,11 @@ function order() {
             <div className="max-w-full min-h-screen mx-1 mt-1 border-2 border-sky-400">
                 <ul className="flex flex-row flex-wrap">
                     {
-                        recent && recent.map((el, id)=>{
+                        prepDispatch == 'prep' ? prepArr.map((el, id)=>{
+                            return (
+                                <OrderList key={id} el={el} id={id} />
+                            )
+                        }) : dispatchArr.map((el, id)=>{
                             return (
                                 <OrderList key={id} el={el} id={id} />
                             )
