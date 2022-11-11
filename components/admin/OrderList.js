@@ -14,11 +14,11 @@ function OrderList({el, id}) {
                         onClick={()=>{dispatch(removeOrder(el.orderId))}}>x</button>
                 <p>{el.date[1]}</p>
             </div>
-            <ul>
+            <ul className="bg-indigo-300">
                 {
                     el.orderArr.map((it,id)=>{
                         return (
-                            <OrderItem it={it} id={id} />
+                            <OrderItem key={id} it={it} id={id} />
                         )
                     })
                 }

@@ -30,10 +30,10 @@ export default function Home() {
         foodList.map((el,id)=>{
           return (
             <li key={id} 
-                className="flex flex-col justify-center transition-all hover:scale-110 hover:z-10 active:scale-100 m-auto"
+                className="flex flex-col justify-center transition-all active:scale-90 m-auto"
                 onClick={()=>{dispatch(setPage(el.category))}}>
               <Link href={'/menuId'}>
-                <div className="w-[20rem] h-[20rem]  border-2 border-slate-600 relative">
+                <div className="w-[20rem] h-[20rem]  border-2 border-slate-600 relative hover:border-4 hover:border-sky-500">
                   <Image src={el.item} fill alt="starter" />
                 </div>
                 <p className="text-2xl mt-1 text-center">{el.category}</p>
