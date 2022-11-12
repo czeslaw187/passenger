@@ -34,7 +34,8 @@ function order() {
                     orderId:Math.floor(Math.random() * 1000000), 
                     orderArr:msg,
                     date: date,
-                    state: 'prep'
+                    state: 'prep',
+                    total: msg.reduce((tot,sum)=>{return tot + sum.price}, 0).toFixed(2)
                 }))
             })
           }

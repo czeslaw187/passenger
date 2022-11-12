@@ -19,6 +19,11 @@ function adminHome() {
                 className="w-[10rem] h-[10rem] border-4 rounded-md border-sky-300 m-5 flex transition duration-150 ease-in-out hover:scale-110 active:scale-100 shadow-md shadow-black">
                     <p className="m-auto">Orders</p>
                 </button>
+                <button 
+                onClick={()=>{router.push('/admin/archive')}}
+                className="w-[10rem] h-[10rem] border-4 rounded-md border-sky-300 m-5 flex transition duration-150 ease-in-out hover:scale-110 active:scale-100 shadow-md shadow-black">
+                    <p className="m-auto">Archive</p>
+                </button>
             </div>
         </div>
      );
