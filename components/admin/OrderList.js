@@ -2,10 +2,10 @@ import { useDispatch } from "react-redux";
 import { removeOrder } from "../../lib/kitchenSlice";
 import OrderItem from "./OrderItem";
 import { changeState } from "../../lib/kitchenSlice";
+import { insertArchive } from "../../lib/archiveSlice";
 
 function OrderList({el, id}) {
     const dispatch = useDispatch()
-
     return ( 
         <li key={id} id={el.orderId} className="w-3/12 h-3/6 border-2 border-sky-500">
             <div className={el.state == 'prep' ?
@@ -21,7 +21,7 @@ function OrderList({el, id}) {
                         onClick={()=>{dispatch(changeState([el.orderId, 'prep']))}}>{'<--'}</button>
                 <button className={el.state == 'dispatch' ? "text-2xl text-right font-bold transition duration-150 ease-in-out hover:text-gray-500 active:text-gray-400" :
                                    "hidden"}
-                        onClick={()=>{dispatch(removeOrder(el.orderId))}}>x</button>
+                        onClick={()=>{dispatch(insertArchive(el)); dispatch(removeOrder(el.orderId))}}>x</button>
                 <p>{el.date[1]}</p>
             </div>
             <ul className="bg-indigo-300">
