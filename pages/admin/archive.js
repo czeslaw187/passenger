@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { getAllArchives } from "../../lib/archiveSlice";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AdminNav from "../../components/admin/AdminNav";
 import Link from "next/link";
 
 function archive() {
+    const [date, setDate] = useState('')
     const dispatch = useDispatch()
     const isLogged = useSelector(state=>state.kitchen.isLogged)
     const router = useRouter()
@@ -15,14 +16,35 @@ function archive() {
         }
         dispatch(getAllArchives())
     },[])
-    const archives = useSelector(state=>state.archive.archive)
-    console.log(archives)
 
+    let archives = useSelector(state=>state.archive.archive)
+
+    if (date && archives) {
+        archives = archives.filter(el=>{
+            let theDay = el.date.split(' ')
+            theDay = theDay[0]
+            theDay = theDay.split('/')
+            let compareDay = date.split('-')
+            return theDay[0] == compareDay[2] && theDay[1] == compareDay[1] && theDay[2] == compareDay[0]
+        })
+    }
+    
     return ( 
         <>
             <AdminNav />
 
             <p className="hover:underline"><Link href={'/admin/home'}>{'<< Back'}</Link></p>
+
+            <div className="max-w-full flex flex-row justify-center space-x-4 mb-[4rem]">
+                <label htmlFor="date">Choose date</label>
+                <input className="bg-indigo-300" 
+                       onChange={(e)=>{setDate(e.target.value)}} 
+                       type="date" 
+                       id="date" 
+                       name="date" 
+                       placeholder="insert your date..." 
+                       value={date || ''}/>
+            </div>
 
             <div className="max-w-full min-h-screen">
                 <ul className="p-2">
@@ -33,12 +55,12 @@ function archive() {
                         <span>Total £</span>
                     </li>
                     {
-                        archives && archives.map((el,id)=>{
+                        archives.length > 0 && archives.map((el,id)=>{
                             return (
-                                <li key={id} className="min-w-full border-2 border-sky-500 rounded-md grid grid-cols-4 justify-items-center">
+                                <li key={id} className="min-w-full mb-1 h-[4rem] border-2 border-sky-500 rounded-md grid grid-cols-4 justify-items-center">
                                     <p>{el.date}</p>
                                     <p>{el.id}</p>
-                                    <p>{el.items}</p>
+                                    <p className="overflow-auto scrollbar-thin scrollbar-track-slate-50 scrollbar-thumb-slate-300 scrollbar-thumb-rounded-md scrollbar-track-rounded-md">{el.items}</p>
                                     <p>{el.total}</p>
                                 </li>
                             )
