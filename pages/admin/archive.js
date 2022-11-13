@@ -19,6 +19,8 @@ function archive() {
 
     let archives = useSelector(state=>state.archive.archive)
 
+    
+
     if (date && archives) {
         archives = archives.filter(el=>{
             let theDay = el.date.split(' ')
@@ -26,6 +28,19 @@ function archive() {
             theDay = theDay.split('/')
             let compareDay = date.split('-')
             return theDay[0] == compareDay[2] && theDay[1] == compareDay[1] && theDay[2] == compareDay[0]
+        })
+    } else {
+        archives = archives.filter(el=>{
+            let today = new Date()
+            today = today.toLocaleString()
+            today = today.split(' ')
+            today = today[0]
+            today = today.split('/')
+            let past = el.date.split(' ')
+            past = past[0]
+            past = past.split('/')
+            console.log(past, today)
+            return past[0] == today[0] 
         })
     }
     
