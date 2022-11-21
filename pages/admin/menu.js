@@ -5,26 +5,32 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import MenuCatBtn from "../../components/admin/MenuCatBtn";
 import MenuItem from "../../components/admin/MenuItem";
+import MenuEditWindow from "../../components/admin/MenuEditWindow";
 
 function menu() {
     const isLogged = useSelector(state=>state.kitchen.isLogged)
     let theMenu = useSelector(state=>state.food.food)
     const [category, setCategory] = useState('All')
+    const [edit, setEdit] = useState(false)
     console.log(theMenu, category)
-
     const router = useRouter()
+    const categories = ['All', 'Starter', 'Main', 'Salad', 'Side']
+
     useEffect(()=>{
         if (!isLogged) {
             router.push('/admin')
         }
     },[])
+
     if (category && category != 'All') {
         theMenu = theMenu.filter(el=>{ return el.category == category}) 
     }
-    const categories = ['All', 'Starter', 'Main', 'Salad', 'Side']
+    
     return ( 
         <>
             <AdminNav />
+            
+            {edit ? <MenuEditWindow edit={edit} setEdit={setEdit} /> : null}
 
             <p className="hover:underline"><Link href={'/admin/home'}>{'<< Back'}</Link></p>
 
@@ -40,7 +46,7 @@ function menu() {
                     {
                     theMenu && theMenu.map((el,id)=>{
                         return (
-                            <MenuItem key={id} el={el} />
+                            <MenuItem key={id} id={id} el={el} edit={edit} setEdit={setEdit} />
                         ) 
                     })
                     }

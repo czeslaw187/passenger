@@ -18,7 +18,7 @@ function archive() {
     },[])
 
     let archives = useSelector(state=>state.archive.archive)
-
+    console.log(archives, 'archives')
     
 
     if (date && archives) {
@@ -39,7 +39,6 @@ function archive() {
             let past = el.date.split(' ')
             past = past[0]
             past = past.split('/')
-            console.log(past, today)
             return past[0] == today[0] 
         })
     }
