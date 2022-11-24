@@ -35,7 +35,7 @@ function order() {
                     orderArr:msg,
                     date: date,
                     state: 'prep',
-                    total: msg.reduce((tot,sum)=>{return tot + sum.price}, 0).toFixed(2)
+                    total: msg.reduce((tot,sum)=>{return tot + parseInt(sum.price)}, 0).toFixed(2)
                 }))
             })
           }

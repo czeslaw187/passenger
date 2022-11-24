@@ -52,13 +52,13 @@ function Navbar() {
                             return (
                                 <li key={id} className="text-2xl space-y-5 ml-2 grid grid-cols-3 hover:underline items-baseline">
                                     <p>{el.item}</p>
-                                    <p className="text-right">£{el.price.toFixed(2)}</p>
+                                    <p className="text-right">£{parseInt(el.price).toFixed(2)}</p>
                                     <button type="close" onClick={()=>{dispatch(removeItem(el.id))}} className="active:scale-75 transition ease-in-out duration-200">X</button>
                                 </li>
                             )
                         })
                     }
-                    <p className={theOrder.length > 0 ? "text-right mr-[5rem] text-xl" : "hidden"}>Total: £{theOrder.reduce((total,sum)=>{return total + sum.price},0).toFixed(2)}</p>
+                    <p className={theOrder.length > 0 ? "text-right mr-[5rem] text-xl" : "hidden"}>Total: £{theOrder.reduce((total,sum)=>{return total + parseInt(sum.price)},0).toFixed(2)}</p>
                     <div className={theOrder.length > 0 ? "flex flex-row justify-end items-center" : "hidden"}>
                         <button 
                         onClick={()=>{dispatch(resetOrder()); setTheOrder([])}} 

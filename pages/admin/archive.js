@@ -56,7 +56,7 @@ function archive() {
                        type="date" 
                        id="date" 
                        name="date" 
-                       placeholder="insert your date..." 
+                       placeholder="choose day..." 
                        value={date || ''}/>
             </div>
 
