@@ -14,11 +14,12 @@ function archive() {
         if (!isLogged) {
             router.push('/admin')
         }
+        console.log('archives')
         dispatch(getAllArchives())
     },[])
 
     let archives = useSelector(state=>state.archive.archive)
-    console.log(archives, 'archives')
+    
     
 
     if (date && archives) {
