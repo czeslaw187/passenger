@@ -19,7 +19,7 @@ function MenuItem({el, edit, setEdit, id}) {
                 </button>
             </div>
             
-            <div className="w-full absolute">
+            <div className="w-full absolute hidden">
                 <div className="relative m-auto w-[15rem] h-[10rem] bg-amber-100 opacity-75 border-2 border-black rounded-md">
 
                 </div>

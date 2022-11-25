@@ -9,7 +9,7 @@ import MenuEditWindow from "../../components/admin/MenuEditWindow";
 
 function menu() {
     const isLogged = useSelector(state=>state.kitchen.isLogged)
-    let theMenu = useSelector(state=>state.food.food)
+    let theMenu = useSelector(state=>state.food.food.rows)
     const [category, setCategory] = useState('All')
     const [edit, setEdit] = useState(false)
     console.log(theMenu, category)

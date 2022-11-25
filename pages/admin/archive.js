@@ -19,7 +19,7 @@ function archive() {
     },[])
 
     let archives = useSelector(state=>state.archive.archive)
-    
+    console.log(archives, 'archive')
     
 
     if (date && archives) {
@@ -31,7 +31,7 @@ function archive() {
             return theDay[0] == compareDay[2] && theDay[1] == compareDay[1] && theDay[2] == compareDay[0]
         })
     } else {
-        archives = archives.filter(el=>{
+        archives && archives.length > 0 ? archives.filter(el=>{
             let today = new Date()
             today = today.toLocaleString()
             today = today.split(' ')
@@ -41,7 +41,7 @@ function archive() {
             past = past[0]
             past = past.split('/')
             return past[0] == today[0] 
-        })
+        }) : null
     }
     
     return ( 
@@ -70,7 +70,7 @@ function archive() {
                         <span>Total £</span>
                     </li>
                     {
-                        archives.length > 0 && archives.map((el,id)=>{
+                        archives && archives.length > 0 ? archives.map((el,id)=>{
                             return (
                                 <li key={id} className="min-w-full mb-1 h-[4rem] border-2 border-sky-500 rounded-md grid grid-cols-4 justify-items-center">
                                     <p>{el.date}</p>
@@ -79,7 +79,7 @@ function archive() {
                                     <p>{el.total}</p>
                                 </li>
                             )
-                        })
+                        }) : null
                     }
                 </ul>
             </div>
