@@ -5,7 +5,7 @@ import {faClipboard} from '@fortawesome/free-solid-svg-icons'
 import { resetOrder, removeItem } from "../lib/newSlice";
 import Link from "next/link";
 import { io } from "socket.io-client"
-let socket = io()
+
 
 function Navbar() {
     const myOrder = useSelector(state=>state.food.order)
@@ -13,14 +13,14 @@ function Navbar() {
     useEffect(() => {
         const socketInitializer = async () => {
             await fetch('/api/socket');
-        
+            let socket = io()
             socket.on('connect', () => {
               console.log('connected')
             })
             socket.emit('input-change', myOrder)
           }    
         socketInitializer()
-      }, [myOrder])
+      }, [])
     useEffect(()=>{
         setTheOrder(myOrder)
     },[myOrder])
