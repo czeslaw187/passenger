@@ -5,7 +5,7 @@ import {faClipboard} from '@fortawesome/free-solid-svg-icons'
 import { resetOrder, removeItem } from "../lib/newSlice";
 import Link from "next/link";
 import { io } from "socket.io-client"
-let socket = io('ws://passenger.vercel.app')
+let socket = io()
 
 function Navbar() {
     const myOrder = useSelector(state=>state.food.order)
@@ -17,7 +17,7 @@ function Navbar() {
             socket.on('connect', () => {
               console.log('connected')
             })
-            // socket.emit('input-change', myOrder)
+            socket.emit('input-change', myOrder)
           }    
         socketInitializer()
       }, [])
