@@ -12,7 +12,7 @@ function Navbar() {
     const [theOrder, setTheOrder] = useState(myOrder)
     useEffect(() => {
         const socketInitializer = async () => {
-            await fetch('/api/socket');
+            await fetch(process.env.NEXT_PUBLIC_URL + '/api/socket');
         
             socket.on('connect', () => {
               console.log('connected')
