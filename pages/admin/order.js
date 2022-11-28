@@ -8,7 +8,7 @@ import {useRouter} from 'next/router'
 let socket = io()
 import Link from "next/link";
 
-function order() {
+function Order() {
     const [prepDispatch, setPrepDispatch] = useState('prep')
     const [yesNo, setYesNo] = useState(false)
     const login = useSelector(state=>state.kitchen.isLogged)
@@ -92,4 +92,4 @@ function order() {
      );
 }
 
-export default order;
+export default Oder;

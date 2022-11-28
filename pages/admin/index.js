@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCredentials } from "../../lib/kitchenSlice";
 
-function admin() {
+function Admin() {
     const router = useRouter()
     const [input, setInput] = useState([])
     const {isLogged, logError} = useSelector(state=>state.kitchen)
@@ -63,4 +63,4 @@ function admin() {
     
 }
 
-export default admin;
+export default Admin;

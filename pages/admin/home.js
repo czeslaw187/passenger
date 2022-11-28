@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import AdminNav from "../../components/admin/AdminNav";
 import { useEffect } from "react";
 
-function adminHome() {
+function AdminHome() {
     const isLogged = useSelector(state=>state.kitchen.isLogged)
     const router = useRouter()
     useEffect(()=>{
@@ -39,4 +39,4 @@ function adminHome() {
      );
 }
 
-export default adminHome;
+export default AdminHome;
