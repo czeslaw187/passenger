@@ -8,7 +8,7 @@ import MenuItem from "../../components/admin/MenuItem";
 import MenuEditWindow from "../../components/admin/MenuEditWindow";
 import MenuDeletePopup from "../../components/admin/MenuDelPop";
 
-function menu() {
+function Menu() {
     const isLogged = useSelector(state=>state.kitchen.isLogged)
     let theMenu = useSelector(state=>state.food.food.rows)
     const [category, setCategory] = useState('All')
@@ -58,4 +58,4 @@ function menu() {
      );
 }
 
-export default menu;
+export default Menu;

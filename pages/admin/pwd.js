@@ -4,7 +4,7 @@ import AdminNav from '../../components/admin/AdminNav'
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-function pwd() {
+function Pwd() {
     const isLogged = useSelector(state=>state.kitchen.isLogged)    
     const router = useRouter()
     useEffect(()=>{
@@ -25,4 +25,4 @@ function pwd() {
      );
 }
 
-export default pwd;
+export default Pwd;

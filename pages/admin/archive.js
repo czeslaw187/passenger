@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import AdminNav from "../../components/admin/AdminNav";
 import Link from "next/link";
 
-function archive() {
+function Archive() {
     const [date, setDate] = useState('')
     const dispatch = useDispatch()
     const isLogged = useSelector(state=>state.kitchen.isLogged)
@@ -87,4 +87,4 @@ function archive() {
      );
 }
 
-export default archive;
+export default Archive;
