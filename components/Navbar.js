@@ -4,31 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faClipboard} from '@fortawesome/free-solid-svg-icons'
 import { resetOrder, removeItem } from "../lib/newSlice";
 import Link from "next/link";
-import { io } from "socket.io-client"
-
+import axios from 'axios'
 
 function Navbar() {
     const myOrder = useSelector(state=>state.food.order)
     const [theOrder, setTheOrder] = useState(myOrder)
-    useEffect(() => {
-        const socketInitializer = async () => {
-            await fetch('/api/socket');
-            let socket = io()
-            socket.on('connect', () => {
-              console.log('connected')
-            })
-            socket.emit('input-change', myOrder)
-          }    
-        socketInitializer()
-      }, [])
+    
     useEffect(()=>{
         setTheOrder(myOrder)
     },[myOrder])
     const dispatch = useDispatch()
     const [dropdown, setDropdown] = useState(false)
 
-    const sendOrder = (order) => {
-        socket.emit('input-change', order)
+    const sendOrder = async (order) => {
+        await axios.post('/api/socket',{message: order})
         dispatch(resetOrder())
     }
 
