@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
-function MenuItem({el, edit, setEdit, id}) {
-    const [remove, setRemove] = useState(false)
+function MenuItem({el, edit, setEdit, delPop, setDelPop}) {
     return ( 
         <li className="w-full h-[5rem] hover:h-fit hover:text-ellipsis border-2 border-sky-500 rounded-sm mb-5 shadow-md grid grid-cols-3 items-center justify-between transition duration-200 ease-in-out">
             <p className="w-full text-lg">{el.name}</p>
@@ -14,15 +13,10 @@ function MenuItem({el, edit, setEdit, id}) {
                         onClick={()=>{setEdit(!edit)}}>
                     <FontAwesomeIcon icon={faPenToSquare} size="xl" />
                 </button>
-                <button className="hover:text-orange-500 active:scale-75 m-1">
+                <button className="hover:text-orange-500 active:scale-75 m-1"
+                        onClick={()=>{setDelPop(!delPop)}}>
                     <FontAwesomeIcon icon={faTrash} size="xl" />
                 </button>
-            </div>
-            
-            <div className="w-full absolute hidden">
-                <div className="relative m-auto w-[15rem] h-[10rem] bg-amber-100 opacity-75 border-2 border-black rounded-md">
-
-                </div>
             </div>
         </li>
      );

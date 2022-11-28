@@ -6,12 +6,14 @@ import { useRouter } from "next/router";
 import MenuCatBtn from "../../components/admin/MenuCatBtn";
 import MenuItem from "../../components/admin/MenuItem";
 import MenuEditWindow from "../../components/admin/MenuEditWindow";
+import MenuDeletePopup from "../../components/admin/MenuDelPop";
 
 function menu() {
     const isLogged = useSelector(state=>state.kitchen.isLogged)
     let theMenu = useSelector(state=>state.food.food.rows)
     const [category, setCategory] = useState('All')
     const [edit, setEdit] = useState(false)
+    const [delPop, setDelPop] = useState(false)
     console.log(theMenu, category)
     const router = useRouter()
     const categories = ['All', 'Starter', 'Main', 'Salad', 'Side']
@@ -31,7 +33,7 @@ function menu() {
             <AdminNav />
             
             {edit ? <MenuEditWindow edit={edit} setEdit={setEdit} /> : null}
-
+            {delPop ? <MenuDeletePopup delPop={delPop} setDelPop={setDelPop} /> : null}
             <p className="hover:underline"><Link href={'/admin/home'}>{'<< Back'}</Link></p>
 
             <div className="max-w-full m-2 h-[3rem] border-2 border-sky-400 flex flex-row flex-wrap justify-around items-center shadow-sm shadow-black">
@@ -46,7 +48,7 @@ function menu() {
                     {
                     theMenu && theMenu.map((el,id)=>{
                         return (
-                            <MenuItem key={id} id={id} el={el} edit={edit} setEdit={setEdit} />
+                            <MenuItem key={id} id={id} el={el} edit={edit} setEdit={setEdit} delPop={delPop} setDelPop={setDelPop} />
                         ) 
                     })
                     }
