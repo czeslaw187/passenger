@@ -18,7 +18,7 @@ function Order() {
         if (!login) {
             router.push('/admin')
         }
-        const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY, {
+        const pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
             cluster: 'eu'
         })
         const channel = pusher.subscribe('chat')
