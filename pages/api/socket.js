@@ -2,7 +2,7 @@ import Pusher from "pusher";
 
 export const pusher = new Pusher({
   appId: process.env.NEXT_PUBLIC_PUSHER_APPID,
-  key: '6a57e9a755ca2823cf03',
+  key: process.env.NEXT_PUBLIC_KEY,
   secret: process.env.NEXT_PUBLIC_PUSHER_SECRET,
   cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER,
   useTLS: true,
