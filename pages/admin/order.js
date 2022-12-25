@@ -38,7 +38,6 @@ function Order() {
       const recent = useSelector(state=>state.kitchen.orderArray)
       const prepArr = recent.filter(el=>el.state == 'prep')
       const dispatchArr = recent.filter(el=>el.state == 'dispatch')
-      console.log(recent, 'recent')
     return ( 
         <>
             <AdminNav />
