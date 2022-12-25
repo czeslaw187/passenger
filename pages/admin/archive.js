@@ -14,13 +14,10 @@ function Archive() {
         if (!isLogged) {
             router.push('/admin')
         }
-        console.log('archives')
         dispatch(getAllArchives())
     },[])
 
-    let archives = useSelector(state=>state.archive.archive)
-    console.log(archives, 'archive')
-    
+    let archives = useSelector(state=>state.archive.archive)    
 
     if (date && archives) {
         archives = archives.filter(el=>{
@@ -28,7 +25,8 @@ function Archive() {
             theDay = theDay[0]
             theDay = theDay.split('/')
             let compareDay = date.split('-')
-            return theDay[0] == compareDay[2] && theDay[1] == compareDay[1] && theDay[2] == compareDay[0]
+            console.log(theDay, compareDay, 'day')
+            return theDay[0] == compareDay[1] && theDay[1] == compareDay[2] && theDay[2] == compareDay[0]
         })
     } else {
         archives && archives.length > 0 ? archives.filter(el=>{
