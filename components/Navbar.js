@@ -23,7 +23,7 @@ function Navbar() {
 
     return ( 
         <>
-            <div className=" flex flex-row items-center justify-between min-w-screen h-[4rem] bg-gradient-to-bl from-blue-400 to-slate-50">
+            <div className=" flex flex-row items-center justify-between min-w-screen h-[4rem] bg-gradient-to-bl from-blue-400 to-slate-50 text-black">
                 <div className="flex flex-row items-center">
                     <a href="#" className="mx-4">Passenger</a>
                     <button 
@@ -35,7 +35,7 @@ function Navbar() {
                 </button>
             </div>
             <div>
-                <ul className={dropdown ? 'animate-opac bg-gradient-to-br from-indigo-100' : "w-full h-0 opacity-0 hidden"}>
+                <ul className={dropdown ? 'animate-opac bg-gradient-to-br from-indigo-100 text-black' : "w-full h-0 opacity-0 hidden"}>
                     {
                         theOrder && theOrder.map((el,id)=>{
                             return (

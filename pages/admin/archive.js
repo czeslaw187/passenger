@@ -43,7 +43,7 @@ function Archive() {
     }
     
     return ( 
-        <>
+        <div className="text-black">
             <AdminNav />
 
             <p className="hover:underline"><Link href={'/admin/home'}>{'<< Back'}</Link></p>
@@ -81,7 +81,7 @@ function Archive() {
                     }
                 </ul>
             </div>
-        </>
+        </div>
      );
 }
 

@@ -39,7 +39,7 @@ function Order() {
       const prepArr = recent.filter(el=>el.state == 'prep')
       const dispatchArr = recent.filter(el=>el.state == 'dispatch')
     return ( 
-        <>
+        <div className="text-black">
             <AdminNav />
 
             <p className="hover:underline"><Link href={'/admin/home'}>{'<< Back'}</Link></p>
@@ -81,7 +81,7 @@ function Order() {
                     }  
                 </ul>
             </div>
-        </>
+        </div>
      );
 }
 
