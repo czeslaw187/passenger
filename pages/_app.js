@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import {persistor, store} from '../lib/store'
 import { PersistGate } from 'redux-persist/integration/react';
 import withRedux from 'next-redux-wrapper'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function MyApp({ Component, pageProps }) {
   return (
