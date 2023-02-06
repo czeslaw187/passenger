@@ -32,11 +32,12 @@ function Navbar() {
                 <div className="flex flex-row items-center">
                     <a href="#" className="mx-4 text-teal-600 no-underline font-bold">Passenger</a>
                     <Button 
+                    outline
                     size="xl"
-                    className="ml-5 text-center"
-                    color="primary">
-                        <Link href={'/admin'}>
-                            <p className="no-underline text-black m-1 text-xl font-bold space-x-3 opacity-60">Admin</p>
+                    className="ml-5 text-center shadow-md shadow-slate-400"
+                    color="success">
+                        <Link href={'/admin'} className="no-underline">
+                            <p className="m-1 text-lime-500 text-xl font-bold font-serif">Admin</p>
                         </Link>
                     </Button>
                 </div>
@@ -50,8 +51,8 @@ function Navbar() {
                     {
                         theOrder && theOrder.map((el,id)=>{
                             return (
-                                <li key={id} className="w-11/12 h-[5rem] mb-2 mx-auto text-2xl space-y-5 grid grid-cols-3 border-2 border-indigo-400 rounded-md shadow-md shadow-black hover:underline items-baseline">
-                                    <p className="mb-2 pd-2 text-lg">{el.item}</p>
+                                <li key={id} className="w-11/12 h-[5rem] my-2 mx-auto text-2xl space-y-5 grid grid-cols-3 border-2 border-indigo-400 rounded-md shadow-md shadow-black hover:underline items-baseline">
+                                    <p className="mb-2 ml-5 pd-2 text-lg">{el.item}</p>
                                     <p className="text-right text-md">£{parseInt(el.price).toFixed(2)}</p>
                                     <button type="close" 
                                             onClick={()=>{dispatch(removeItem(el.id))}} 
