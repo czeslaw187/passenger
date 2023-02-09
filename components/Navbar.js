@@ -5,7 +5,7 @@ import {faClipboard} from '@fortawesome/free-solid-svg-icons'
 import { resetOrder, removeItem } from "../lib/newSlice";
 import Link from "next/link";
 import axios from 'axios'
-import { Collapse, Button } from "reactstrap";
+import { Collapse, Button, Card, CardBody, CardTitle, CardText } from "reactstrap";
 function Navbar() {
     const myOrder = useSelector(state=>state.food.order)
     const [theOrder, setTheOrder] = useState(myOrder)
@@ -51,14 +51,21 @@ function Navbar() {
                     {
                         theOrder && theOrder.map((el,id)=>{
                             return (
-                                <li key={id} className="w-11/12 h-[5rem] my-2 mx-auto text-2xl space-y-5 grid grid-cols-3 border-2 border-indigo-400 rounded-md shadow-md shadow-black hover:underline items-baseline">
-                                    <p className="mb-2 ml-5 pd-2 text-lg">{el.item}</p>
-                                    <p className="text-right text-md">£{parseInt(el.price).toFixed(2)}</p>
-                                    <button type="close" 
-                                            onClick={()=>{dispatch(removeItem(el.id))}} 
-                                            className="active:scale-75 transition ease-in-out duration-200 text-right pr-5">
-                                                X
-                                    </button>
+                                <li id={id}>
+                                    <Card className="w-11/23 h-[5rem] shadow-md shadow-black m-1 hover:underline">
+                                        <CardBody className="grid grid-cols-3">
+                                            <CardTitle>
+                                                {el.item}
+                                            </CardTitle>
+                                            <CardText className="text-center">
+                                                £{parseInt(el.price).toFixed(2)}
+                                            </CardText>
+                                            <CardText className="text-end">
+                                                <Button close
+                                                        onClick={()=>{dispatch(removeItem(el.id))}}></Button>
+                                            </CardText>
+                                        </CardBody>
+                                    </Card>
                                 </li>
                             )
                         })
