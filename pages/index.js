@@ -9,6 +9,7 @@ import vegan from '../public/img/main-vegan.jpg'
 import potatoe from '../public/img/starter-potatoes.jpg'
 import sides from '../public/img/starter-bruschetta.jpeg'
 import Spinner from "../components/spinner"
+import { Card, CardTitle, CardHeader } from "reactstrap"
 
 import Navbar from "../components/Navbar"
 
@@ -26,18 +27,21 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <ul className="min-w-full max-h-full flex flex-row flex-wrap p-5">  
+      <ul className="min-w-full max-h-full flex flex-row flex-wrap p-5 justify-between">  
       {
         foodList.map((el,id)=>{
           return (
-            <li key={id} 
-                className="flex flex-col justify-center m-auto text-black transition duration-300 ease-in-out hover:scale-105 active:scale-100"
-                onClick={()=>{dispatch(setPage(el.category))}}>
+            <li key={id}>
               <Link href={'/menuId'} className="text-gray-500 no-underline">
-                <div className="w-[10rem] h-[10rem]  border-2 border-slate-600 relative hover:border-4 hover:border-sky-500">
-                  <Image src={el.item} fill alt="starter"/>
-                </div>
-                <p className="text-2xl mt-1 text-center font-serif">{el.category}</p>
+                <Card className="w-[18rem] h-[24rem] my-3 bg-gradient-to-br from-sky-50 to-blue-100 transition duration-300 hover:scale-105 active:scale-100"
+                      onClick={()=>{dispatch(setPage(el.category))}}>
+                  <CardHeader className="my-1">
+                    <Image src={el.item} alt="starter" className="h-[20rem]" />
+                  </CardHeader>
+                  <CardTitle className="text-center text-2xl font-serif">
+                    {el.category}
+                  </CardTitle>
+                </Card>
               </Link>
             </li>
           )
