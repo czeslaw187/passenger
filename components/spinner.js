@@ -1,7 +1,7 @@
 function Spinner() {
     return ( 
         <div aria-label="Loading..." role="status" className="flex items-center space-x-2">
-            <svg className="h-6  h-6 animate-spin stroke-gray-500" viewBox="0 0 256 256">
+            <svg className="h-6 animate-spin stroke-gray-500" viewBox="0 0 256 256">
                 <line x1="128" y1="32" x2="128" y2="64" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24"></line>
                 <line
                 x1="195.9"

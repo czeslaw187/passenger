@@ -2,8 +2,15 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import AdminNav from "../../components/admin/AdminNav";
 import { useEffect } from "react";
+import { List, ListInlineItem, Card, CardBody, CardTitle, Container } from "reactstrap";
 
 function AdminHome() {
+    const pages = [
+                    {page:'Orders', url:'/admin/order'}, 
+                    {page:'Archive', url:'/admin/archive'},
+                    {page:'Menu', url:'/admin/menu'},
+                    {page:'Change Password', url:'/admin/pwd'}
+                  ]
     const isLogged = useSelector(state=>state.kitchen.isLogged)
     const router = useRouter()
     useEffect(()=>{
@@ -13,28 +20,22 @@ function AdminHome() {
     return ( 
         <div>
             <AdminNav />
-            <div className="max-w-full min-h-screen overflow-auto flex flex-row flex-wrap">
-                <button 
-                onClick={()=>{router.push('/admin/order')}}
-                className="w-[10rem] h-[10rem] border-4 rounded-md border-sky-300 m-5 flex transition duration-150 ease-in-out hover:scale-110 active:scale-100 shadow-md shadow-black">
-                    <p className="m-auto">Orders</p>
-                </button>
-                <button 
-                onClick={()=>{router.push('/admin/archive')}}
-                className="w-[10rem] h-[10rem] border-4 rounded-md border-sky-300 m-5 flex transition duration-150 ease-in-out hover:scale-110 active:scale-100 shadow-md shadow-black">
-                    <p className="m-auto">Archive</p>
-                </button>
-                <button 
-                onClick={()=>{router.push('/admin/menu')}}
-                className="w-[10rem] h-[10rem] border-4 rounded-md border-sky-300 m-5 flex transition duration-150 ease-in-out hover:scale-110 active:scale-100 shadow-md shadow-black">
-                    <p className="m-auto">Menu</p>
-                </button>
-                <button 
-                onClick={()=>{router.push('/admin/pwd')}}
-                className="w-[10rem] h-[10rem] border-4 rounded-md border-sky-300 m-5 flex transition duration-150 ease-in-out hover:scale-110 active:scale-100 shadow-md shadow-black">
-                    <p className="m-auto">Change Password</p>
-                </button>
-            </div>
+            <Container className="text-center flex flex-row flex-wrap justify-between">
+                {
+                    pages.map((page,id)=>{
+                        return (
+                            <Card className="w-[10rem] h-[10rem] m-4 font-serif transition duration-300 ease-in-out hover:scale-105 active:scale-100 shadow-md shadow-black bg-gradient-to-br from-sky-50 to-orange-50"
+                                  onClick={()=>{router.push(page.url)}}>
+                                <CardBody className="flex h-full m-auto">
+                                    <CardTitle className="text-2xl text-center m-auto">
+                                        {page.page}
+                                    </CardTitle>
+                                </CardBody>
+                            </Card>
+                        )
+                    })
+                }
+            </Container>
         </div>
      );
 }
