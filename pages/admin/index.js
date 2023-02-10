@@ -37,7 +37,7 @@ function Admin() {
         <Container className="flex flex-col h-screen">
             <Container className="text-lg text-center m-auto">
             <Link href={'/'} className="font-mono no-underline text-black text-lg hover:text-xl active:text-lg">{'<< Back'}</Link>
-            <Form className="m-auto w-4/12 h-[20rem] border-4 rounded-md border-slate-300 shadow-xl shadow-black flex flex-col items-center font-serif">
+            <Form className="m-auto w-4/12 h-[22rem] border-4 rounded-md border-slate-300 shadow-xl shadow-black flex flex-col items-center font-serif">
                 <p className="m-0 text-red-500 text-lg">{kitchen.logError}</p>
                 <FormGroup>
                     <Label className="my-3 text-lg" for="login">Login</Label>
