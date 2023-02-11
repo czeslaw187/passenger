@@ -20,11 +20,11 @@ function AdminHome() {
     return ( 
         <div>
             <AdminNav />
-            <Container className="text-center flex flex-row flex-wrap justify-between">
+            <Container className="text-center flex flex-row flex-wrap justify-center md:justify-between">
                 {
                     pages.map((page,id)=>{
                         return (
-                            <Card className="w-[10rem] h-[10rem] m-4 font-serif transition duration-300 ease-in-out hover:scale-105 active:scale-100 shadow-md shadow-black bg-gradient-to-br from-sky-50 to-orange-50"
+                            <Card key={id} className="w-[10rem] h-[10rem] m-4 font-serif transition duration-300 ease-in-out hover:scale-105 active:scale-100 hover:border-2 hover:border-black shadow-md shadow-black bg-gradient-to-br from-sky-50 to-orange-50"
                                   onClick={()=>{router.push(page.url)}}>
                                 <CardBody className="flex h-full m-auto">
                                     <CardTitle className="text-2xl text-center m-auto">
