@@ -6,6 +6,8 @@ import OrderList from '../../components/admin/OrderList'
 import {useRouter} from 'next/router'
 import Pusher from 'pusher-js'
 import Link from "next/link";
+import { Button, Nav, NavItem, Navbar, List, Container } from "reactstrap";
+import ClearOrders from "../../components/admin/ClearOrders";
 
 function Order() {
     const [prepDispatch, setPrepDispatch] = useState('prep')
@@ -39,35 +41,35 @@ function Order() {
       const prepArr = recent.filter(el=>el.state == 'prep')
       const dispatchArr = recent.filter(el=>el.state == 'dispatch')
     return ( 
-        <div className="text-black">
+        <>
             <AdminNav />
 
-            <p className="hover:underline"><Link href={'/admin/home'}>{'<< Back'}</Link></p>
+            <Link className="text-lg text-black no-underline font-serif hover:font-bold hover:underline" href={'/admin/home'}>{'<< Back'}</Link>
 
-            <div className="max-w-full m-2 h-[3rem] border-2 border-sky-400 flex flex-row justify-around items-center shadow-sm shadow-black">
-                <button className={prepDispatch == 'prep' ?
-                                   "w-[8rem] h-[2rem] m-1 border-2 border-sky-500 transition duration-150 ease-in-out hover:bg-sky-500 active:bg-sky-300 shadow-sm shadow-black bg-sky-500" :
-                                   "w-[8rem] h-[2rem] m-1 border-2 border-sky-500 transition duration-150 ease-in-out hover:bg-sky-500 active:bg-sky-300 shadow-sm shadow-black"}
-                        onClick={()=>{setPrepDispatch('prep')}}>Cook</button>
-                <button className={prepDispatch == 'dispatch' ?
-                                   "w-[8rem] h-[2rem] m-1 border-2 border-sky-500 transition duration-150 ease-in-out hover:bg-sky-500 active:bg-sky-300 shadow-sm shadow-black bg-sky-500" :
-                                   "w-[8rem] h-[2rem] m-1 border-2 border-sky-500 transition duration-150 ease-in-out hover:bg-sky-500 active:bg-sky-300 shadow-sm shadow-black"}
-                        onClick={()=>{setPrepDispatch('dispatch')}}>Dispatch</button>
-                <button className="w-[8rem] h-[2rem] m-1 border-2 border-sky-500 transition duration-150 ease-in-out hover:bg-sky-500 active:bg-sky-300 shadow-sm shadow-black"
-                        onClick={()=>{setYesNo(!yesNo)}}>Clear Orders</button>
-                <div className={yesNo ? "animate-show absolute min-w-screen min-h-screen flex" : "hidden"}>
-                    <div className="relative m-auto w-[15rem] h-[8rem] bg-amber-100 border-2 rounded-md text-center flex flex-col justify-center">
-                        <p className="mx-auto text-lg">Are you sure ?</p>
-                        <div className="space-x-4">
-                            <button className="hover:underline" onClick={()=>{dispatch(clearOrders()); setYesNo(!yesNo)}}>Yes</button>
-                            <button className="hover:underline" onClick={()=>{setYesNo(!yesNo)}}>No</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div className="max-w-full min-h-screen mx-1 mt-1 border-2 border-sky-400">
-                <ul className="flex flex-row flex-wrap">
+            <Navbar>
+                <Nav navbar className="m-2 w-full h-[6rem] flex-row justify-around items-center shadow-sm shadow-black font-serif">
+                    <NavItem className="w-4/12 md:w-3/12">
+                        <Button className="w-full h-[4rem] m-1 shadow-sm shadow-black font-bold"
+                                outline
+                                active={prepDispatch == 'prep' ? true : false}
+                                color="primary"
+                                onClick={()=>{setPrepDispatch('prep')}}>Cook</Button>
+                    </NavItem>
+                    <NavItem className="w-4/12 md:w-3/12">
+                        <Button className="w-full h-[4rem] m-1 shadow-sm shadow-black font-bold"
+                                outline
+                                active={prepDispatch == 'dispatch' ? true : false}
+                                color="primary"
+                                onClick={()=>{setPrepDispatch('dispatch')}}>Dispatch</Button>
+                    </NavItem>
+                    <NavItem className="w-4/12 md:w-3/12">
+                        <ClearOrders setYesNo={setYesNo} clearOrders={clearOrders} yesNo={yesNo}/>        
+                    </NavItem>
+                </Nav>
+            </Navbar>
+
+            <Container className="max-w-full min-h-screen mx-1 mt-1">
+                <List type="inline">
                     {
                         prepDispatch == 'prep' ? prepArr.map((el, id)=>{
                             return (
@@ -79,9 +81,9 @@ function Order() {
                             )
                         })
                     }  
-                </ul>
-            </div>
-        </div>
+                </List>
+            </Container>
+        </>
      );
 }
 

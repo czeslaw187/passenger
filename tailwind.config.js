@@ -19,12 +19,17 @@ module.exports = {
         opac: {
           '0%': {opacity: '0'},
           '100%': {opacity: '1'}
+        },
+        scale: {
+          '0%': {transform: 'scale(1)'},
+          '100': {transform: 'scale(1.3)'}
         }
       },
       animation: {
         'dropdown': 'dropdown 0.25s ease-in-out',
         'show': 'show 0.3s ease-out',
-        'opac': 'opac 0.4s ease-out'
+        'opac': 'opac 0.4s ease-out',
+        'scale': 'scale 0.2s ease-in-out'
       },
     },
   },
