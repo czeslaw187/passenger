@@ -15,7 +15,8 @@ function AdminNav() {
                 {date}
             </NavItem>
             <NavItem>
-                <Button outline color="danger" className="w-full h-[3rem] my-3 border-2 transition duration-150 ease-in-out rounded-lg shadow-sm shadow-black"
+                <Button outline color="danger" 
+                        className="w-full h-[3rem] my-3 border-2 transition duration-150 ease-in-out rounded-lg shadow-sm shadow-black"
                         onClick={()=>{dispatch(login(false)); router.push('/admin')}}>Sign Out</Button>
             </NavItem>    
         </Nav>

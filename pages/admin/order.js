@@ -38,8 +38,8 @@ function Order() {
         })
     }, [])
       const recent = useSelector(state=>state.kitchen.orderArray)
-      const prepArr = recent.filter(el=>el.state == 'prep')
-      const dispatchArr = recent.filter(el=>el.state == 'dispatch')
+      const prepArr = recent.filter(el=>el.state == 'prep').reverse()
+      const dispatchArr = recent.filter(el=>el.state == 'dispatch').reverse()
     return ( 
         <>
             <AdminNav />
@@ -68,8 +68,8 @@ function Order() {
                 </Nav>
             </Navbar>
 
-            <Container className="max-w-full min-h-screen mx-1 mt-1">
-                <List type="inline">
+            <Container className="max-w-full min-h-screen mt-1 px-0 py-1">
+                <List type="inline" className="absolute w-full">
                     {
                         prepDispatch == 'prep' ? prepArr.map((el, id)=>{
                             return (

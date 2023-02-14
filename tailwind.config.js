@@ -21,8 +21,8 @@ module.exports = {
           '100%': {opacity: '1'}
         },
         scale: {
-          '0%': {transform: 'scale(1)'},
-          '100': {transform: 'scale(1.3)'}
+          '0%': {height: 'inherit', width: 'inherit'},
+          '100': {height: '30rem', width: '50rem'}
         }
       },
       animation: {

@@ -5,6 +5,9 @@ import { changeState } from "../../lib/kitchenSlice";
 import { insertArchive } from "../../lib/archiveSlice";
 import { Card, CardHeader, CardBody, Button, ListInlineItem, CardText, CloseButton } from "reactstrap";
 import { useState } from "react";
+import { useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function OrderList({el, id}) {
     const dispatch = useDispatch()
@@ -12,15 +15,15 @@ function OrderList({el, id}) {
     const toggleMax =()=> {
         setMax(!max)
     }
-    console.log(max)
+    console.log(el,'el')
     return ( 
-        <ListInlineItem key={id} id={el.orderId}>
-            <Card className={toggleMax ? 'w-[40rem] h-3/6 align-top my-3 transition duration-400 ease-in-out' : 'w-[20rem] h-3/6 align-top my-3'}>
+        <ListInlineItem key={id} id={el.orderId} className="w-3/12 m-0">
+            <Card className={max ? "absolute scale-x-[2] scale-y-[2] z-[1000] left-[2rem] top-[2rem] translate-x-[50%] translate-y-[50%] transition duration-300 ease-in-out" : 'w-full h-3/6 align-top my-3'}>
                 <CardHeader className="flex flex-row flex-wrap justify-between pr-0">
-                    <CardText className="w-4/12">
+                    <CardText>
                         id: {el.orderId}
                     </CardText>
-                    {el.state == 'prep' ? <Button outline onClick={toggleMax} className="border-none ml-auto">M</Button> : null}
+                    {el.state == 'prep' ? <Button outline onClick={toggleMax} className="border-none ml-auto pt-0 mb-auto"><FontAwesomeIcon icon={faMagnifyingGlass}/></Button> : null}
                     {el.state == 'prep' ? 
                         <CloseButton type="close" className="ml-auto w-3/12" onClick={()=>{dispatch(changeState([el.orderId, 'dispatch']))}}/> : 
                      el.state == 'dispatch' ?
