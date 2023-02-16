@@ -8,16 +8,21 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-function OrderList({el, id}) {
+function OrderList({el, id, dragStart, dragEnter, drop}) {
     const dispatch = useDispatch()
     const [max,setMax] = useState(false)
     const toggleMax =()=> {
         setMax(!max)
     }
-    console.log(el,'el')
     return ( 
-        <ListInlineItem key={id} id={el.orderId} className="w-3/12 m-0" drag="x">
-            <Card className={max ? "absolute scale-x-[2] scale-y-[2] z-[1000] left-[2rem] top-[2rem] translate-x-[50%] translate-y-[50%] transition duration-300 ease-in-out" : 'w-full h-3/6 align-top my-3'}>
+        <div key={id} 
+             id={el.orderId} 
+             className="w-3/12 m-0 h-fit" 
+             draggable 
+             onDragStart={(e)=>{dragStart(e, id)}}
+             onDragEnter={(e)=>{dragEnter(e, id)}}
+             onDragEnd={drop}>
+            <Card className={max ? "absolute scale-x-[2] scale-y-[2] z-[1000] left-[2rem] top-[2rem] translate-x-[50%] translate-y-[50%] transition duration-300 ease-in-out" : 'w-full align-top my-3'}>
                 <CardHeader className="flex flex-row flex-wrap justify-between pr-0">
                     <CardText>
                         id: {el.orderId}
@@ -45,7 +50,7 @@ function OrderList({el, id}) {
                     </ul>
                 </CardBody>
             </Card>
-        </ListInlineItem>
+        </div>
      );
 }
 

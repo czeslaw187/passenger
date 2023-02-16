@@ -1,25 +1,45 @@
 import AdminNav from "../../components/admin/AdminNav";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addOrder, clearOrders } from "../../lib/kitchenSlice";
 import OrderList from '../../components/admin/OrderList'
 import {useRouter} from 'next/router'
 import Pusher from 'pusher-js'
 import Link from "next/link";
-import { Button, Nav, NavItem, Navbar, List, Container } from "reactstrap";
+import { Button, Nav, NavItem, Navbar } from "reactstrap";
 import ClearOrders from "../../components/admin/ClearOrders";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 function Order() {
     const recent = useSelector(state=>state.kitchen.orderArray)
     const prepArr = recent.filter(el=>el.state == 'prep').reverse()
     const dispatchArr = recent.filter(el=>el.state == 'dispatch').reverse()
-    const [itemList,setItemList] = useState(recent)
     const [prepDispatch, setPrepDispatch] = useState('prep')
     const [yesNo, setYesNo] = useState(false)
     const login = useSelector(state=>state.kitchen.isLogged)
     const router = useRouter()
     const dispatch = useDispatch()
+    const prepOrDispatchArr = prepDispatch == 'prep' ? prepArr : dispatchArr
+    // draggable logic
+    const [theList,setTheList] = useState(prepOrDispatchArr)
+    const dragItem = useRef()
+    const dragOverItem = useRef()
+    const dragStart =(e, position)=> {
+        dragItem.current = position
+    }
+    const dragEnter =(e, position)=> {
+        dragOverItem.current = position
+    }
+    const drop = (e) => {
+        const copyListItems = [...theList];
+        const dragItemContent = copyListItems[dragItem.current];
+        console.log(dragItem.current,'drop')
+        copyListItems.splice(dragItem.current, 1);
+        copyListItems.splice(dragOverItem.current, 0, dragItemContent);
+        dragItem.current = null;
+        dragOverItem.current = null;
+        setTheList(copyListItems)
+      };
+    // end of draggable logic
 
     useEffect(() => {
         if (!login) {
@@ -42,15 +62,9 @@ function Order() {
                 }))
         })
     }, [])
-    
-    const handleDrop = (droppedItem) => {
-        if (!droppedItem.destination) return;
-        var updatedList = [...itemList];
-        const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
-        updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
-        setItemList(updatedList);
-    };
 
+    console.log(theList, 'list')
+        
     return ( 
         <>
             <AdminNav />
@@ -79,51 +93,14 @@ function Order() {
                 </Nav>
             </Navbar>
 
-            <div className="mt-1 px-0 py-1 mx-1">
-                <DragDropContext onDragEnd={handleDrop}>
-                    <Droppable droppableId="list-container" direction="horizontal" className="flex">
-                        {(provided)=>{
-                            return(<div
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                          >
-                            {
-                                prepDispatch == 'prep' ? prepArr.map((el, id)=>{
-                                    return (
-                                        <Draggable key={el.orderId}draggableId={el.orderId.toString()} index={id}>
-                                            {(provided) => {return(
-                                                <div
-                                                ref={provided.innerRef}
-                                                {...provided.dragHandleProps}
-                                                {...provided.draggableProps}
-                                                >
-                                                    <OrderList key={id} el={el} id={id} />
-                                                </div>
-                                            )}}
-                                        </Draggable>
-                                    )
-                                }) : dispatchArr.map((el, id)=>{
-                                    return (
-                                        <Draggable key={el.orderId} draggableId={el.orderId.toString()} index={id}>
-                                            {(provided) => {return(
-                                                <div
-                                                ref={provided.innerRef}
-                                                {...provided.dragHandleProps}
-                                                {...provided.draggableProps}
-                                                >
-                                                    <OrderList key={id} el={el} id={id} />
-                                                </div>
-                                            )}}
-                                        </Draggable>
-                                    )
-                                })
-                            }   
-                            {provided.placeholder}    
-                          </div>)
-                        }}
-                    
-                    </Droppable>
-                </DragDropContext>
+            <div className="mt-1 px-0 py-1 mx-1 flex">
+                {
+                    theList && theList.map((el, id)=>{
+                        return (
+                            <OrderList key={id} el={el} id={id} dragStart={dragStart} dragEnter={dragEnter} drop={drop}/>
+                        )
+                    })
+                }     
             </div>
         </>
      );
