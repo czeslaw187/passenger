@@ -8,8 +8,13 @@ import Pusher from 'pusher-js'
 import Link from "next/link";
 import { Button, Nav, NavItem, Navbar, List, Container } from "reactstrap";
 import ClearOrders from "../../components/admin/ClearOrders";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 function Order() {
+    const recent = useSelector(state=>state.kitchen.orderArray)
+    const prepArr = recent.filter(el=>el.state == 'prep').reverse()
+    const dispatchArr = recent.filter(el=>el.state == 'dispatch').reverse()
+    const [itemList,setItemList] = useState(recent)
     const [prepDispatch, setPrepDispatch] = useState('prep')
     const [yesNo, setYesNo] = useState(false)
     const login = useSelector(state=>state.kitchen.isLogged)
@@ -37,9 +42,15 @@ function Order() {
                 }))
         })
     }, [])
-      const recent = useSelector(state=>state.kitchen.orderArray)
-      const prepArr = recent.filter(el=>el.state == 'prep').reverse()
-      const dispatchArr = recent.filter(el=>el.state == 'dispatch').reverse()
+    
+    const handleDrop = (droppedItem) => {
+        if (!droppedItem.destination) return;
+        var updatedList = [...itemList];
+        const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
+        updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
+        setItemList(updatedList);
+    };
+
     return ( 
         <>
             <AdminNav />
@@ -68,21 +79,52 @@ function Order() {
                 </Nav>
             </Navbar>
 
-            <Container className="max-w-full min-h-screen mt-1 px-0 py-1">
-                <List type="inline" className="absolute w-full">
-                    {
-                        prepDispatch == 'prep' ? prepArr.map((el, id)=>{
-                            return (
-                                <OrderList key={id} el={el} id={id} />
-                            )
-                        }) : dispatchArr.map((el, id)=>{
-                            return (
-                                <OrderList key={id} el={el} id={id} />
-                            )
-                        })
-                    }  
-                </List>
-            </Container>
+            <div className="mt-1 px-0 py-1 mx-1">
+                <DragDropContext onDragEnd={handleDrop}>
+                    <Droppable droppableId="list-container" direction="horizontal" className="flex">
+                        {(provided)=>{
+                            return(<div
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                          >
+                            {
+                                prepDispatch == 'prep' ? prepArr.map((el, id)=>{
+                                    return (
+                                        <Draggable key={el.orderId}draggableId={el.orderId.toString()} index={id}>
+                                            {(provided) => {return(
+                                                <div
+                                                ref={provided.innerRef}
+                                                {...provided.dragHandleProps}
+                                                {...provided.draggableProps}
+                                                >
+                                                    <OrderList key={id} el={el} id={id} />
+                                                </div>
+                                            )}}
+                                        </Draggable>
+                                    )
+                                }) : dispatchArr.map((el, id)=>{
+                                    return (
+                                        <Draggable key={el.orderId} draggableId={el.orderId.toString()} index={id}>
+                                            {(provided) => {return(
+                                                <div
+                                                ref={provided.innerRef}
+                                                {...provided.dragHandleProps}
+                                                {...provided.draggableProps}
+                                                >
+                                                    <OrderList key={id} el={el} id={id} />
+                                                </div>
+                                            )}}
+                                        </Draggable>
+                                    )
+                                })
+                            }   
+                            {provided.placeholder}    
+                          </div>)
+                        }}
+                    
+                    </Droppable>
+                </DragDropContext>
+            </div>
         </>
      );
 }

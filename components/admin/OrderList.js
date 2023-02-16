@@ -5,7 +5,6 @@ import { changeState } from "../../lib/kitchenSlice";
 import { insertArchive } from "../../lib/archiveSlice";
 import { Card, CardHeader, CardBody, Button, ListInlineItem, CardText, CloseButton } from "reactstrap";
 import { useState } from "react";
-import { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
@@ -17,7 +16,7 @@ function OrderList({el, id}) {
     }
     console.log(el,'el')
     return ( 
-        <ListInlineItem key={id} id={el.orderId} className="w-3/12 m-0">
+        <ListInlineItem key={id} id={el.orderId} className="w-3/12 m-0" drag="x">
             <Card className={max ? "absolute scale-x-[2] scale-y-[2] z-[1000] left-[2rem] top-[2rem] translate-x-[50%] translate-y-[50%] transition duration-300 ease-in-out" : 'w-full h-3/6 align-top my-3'}>
                 <CardHeader className="flex flex-row flex-wrap justify-between pr-0">
                     <CardText>
